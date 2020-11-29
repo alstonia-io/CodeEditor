@@ -15,7 +15,7 @@
   ~   limitations under the License.
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -81,8 +81,47 @@
     </LinearLayout>
 
     <io.github.rosemoe.editor.widget.CodeEditor
+        android:id="@+id/editor"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/editor"/>
+        android:layout_height="match_parent" />
 
-</LinearLayout>
+    <LinearLayout
+        android:id="@+id/main_activity_emoji_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/chat_input_background"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+
+        android:padding="4dp">
+
+        <ImageButton
+            android:id="@+id/main_activity_undo"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="12dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/baseline_undo_black_18dp" />
+
+        <ImageButton
+            android:id="@+id/main_activity_redo"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="12dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/baseline_redo_black_18dp" />
+
+        <ImageButton
+            android:id="@+id/main_activity_emoji"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="12dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_send" />
+
+    </LinearLayout>
+
+</RelativeLayout>
+
+

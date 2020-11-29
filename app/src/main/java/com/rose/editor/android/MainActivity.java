@@ -25,6 +25,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -59,6 +60,7 @@ public class MainActivity extends Activity {
     private CodeEditor editor;
     private LinearLayout panel;
     private EditText search, replace;
+    private ImageButton undo, redo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +73,8 @@ public class MainActivity extends Activity {
         panel = findViewById(R.id.search_panel);
         search = findViewById(R.id.search_editor);
         replace = findViewById(R.id.replace_editor);
+        undo = findViewById(R.id.main_activity_undo);
+        redo = findViewById(R.id.main_activity_redo);
 
         search.addTextChangedListener(new TextWatcher() {
             @Override
@@ -96,6 +100,20 @@ public class MainActivity extends Activity {
         editor.setText("/**\n * Demo\n */\n@SuppressWarnings(/**/\"unused\")\n" +
                 "public class Main {\n\n\tpublic static void main(String[] args) {\n\t\t" +
                 "// Comment\n\t\tSystem.out.println(\"Hello\");\n\t}\n\n}\n");
+
+        undo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editor.undo();
+            }
+        });
+
+        redo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editor.redo();
+            }
+        });
     }
 
     @Override
