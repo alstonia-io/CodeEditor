@@ -18,7 +18,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/main_activity_root_view">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -97,12 +98,30 @@
         android:padding="4dp">
 
         <ImageButton
+            android:id="@+id/emoji_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="12dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/emoji_ios_category_smileysandpeople" />
+
+        <ImageButton
             android:id="@+id/main_activity_undo"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:padding="12dp"
             android:scaleType="centerCrop"
             android:src="@drawable/baseline_undo_black_18dp" />
+
+        <EditText
+            android:id="@+id/main_activity_chat_bottom_message_edittext"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_weight="1"
+            android:imeOptions="actionSend"
+            android:importantForAutofill="no"
+            android:inputType="textCapSentences|textMultiLine"
+            android:maxLines="3" />
 
         <ImageButton
             android:id="@+id/main_activity_redo"

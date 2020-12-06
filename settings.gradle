@@ -1,4 +1,6 @@
-/*******************************************************************************
+include ':emoji-material'
+include ':emoji-ios'
+include ':emoji' /*******************************************************************************
  *   Copyright 2020 Rosemoe
  *
  *   Licensed under the Apache License, Version 2.0 (the "License");

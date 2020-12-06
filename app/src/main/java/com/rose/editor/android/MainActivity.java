@@ -15,19 +15,35 @@
  */
 package com.rose.editor.android;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
+import com.vanniktech.emoji.EmojiEditText;
+import com.vanniktech.emoji.EmojiManager;
+import com.vanniktech.emoji.EmojiPopup;
+import com.vanniktech.emoji.ios.IosEmojiProvider;
+import com.vanniktech.emoji.material.MaterialEmojiLayoutFactory;
 
 import io.github.rosemoe.editor.langs.EmptyLanguage;
 import io.github.rosemoe.editor.langs.desc.CDescription;
@@ -55,15 +71,27 @@ import io.github.rosemoe.editor.widget.schemes.SchemeGitHub;
 import io.github.rosemoe.editor.widget.schemes.SchemeNotepadXX;
 import io.github.rosemoe.editor.widget.schemes.SchemeVS2019;
 
-public class MainActivity extends Activity {
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
+public class MainActivity extends AppCompatActivity {
 
     private CodeEditor editor;
     private LinearLayout panel;
     private EditText search, replace;
     private ImageButton undo, redo;
 
+    static final String TAG = "MainActivity";
+    EmojiPopup emojiPopup;
+    ImageView emojiButton;
+    ViewGroup rootView;
+    EditText editText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+//        EmojiManager.destroy();
+//        EmojiManager.install(new IosEmojiProvider());
+//        getLayoutInflater().setFactory2(new MaterialEmojiLayoutFactory((LayoutInflater.Factory2) getDelegate()));
         super.onCreate(savedInstanceState);
         CrashHandler.INSTANCE.init(this);
         setContentView(R.layout.activity_main);
@@ -75,6 +103,9 @@ public class MainActivity extends Activity {
         replace = findViewById(R.id.replace_editor);
         undo = findViewById(R.id.main_activity_undo);
         redo = findViewById(R.id.main_activity_redo);
+        emojiButton = findViewById(R.id.emoji_button);
+        editText = findViewById(R.id.main_activity_chat_bottom_message_edittext);
+        rootView = findViewById(R.id.main_activity_root_view);
 
         search.addTextChangedListener(new TextWatcher() {
             @Override
@@ -114,6 +145,14 @@ public class MainActivity extends Activity {
                 editor.redo();
             }
         });
+
+        emojiButton.setColorFilter(ContextCompat.getColor(this, R.color.emoji_icons), PorterDuff.Mode.SRC_IN);
+        emojiButton.setOnClickListener(ignore -> emojiPopup.toggle());
+
+//        EmojiManager.destroy();
+        EmojiManager.install(new IosEmojiProvider());
+//        recreate();
+        setUpEmojiPopup();
     }
 
     @Override
@@ -334,5 +373,18 @@ public class MainActivity extends Activity {
         } catch (IllegalStateException e) {
             e.printStackTrace();
         }
+    }
+
+    private void setUpEmojiPopup() {
+        emojiPopup = EmojiPopup.Builder.fromRootView(rootView)
+                .setOnEmojiBackspaceClickListener(ignore -> Log.d(TAG, "Clicked on Backspace"))
+                .setOnEmojiClickListener((ignore, ignore2) -> Log.d(TAG, "Clicked on emoji"))
+                .setOnEmojiPopupShownListener(() -> emojiButton.setImageResource(R.drawable.ic_keyboard))
+                .setOnSoftKeyboardOpenListener(ignore -> Log.d(TAG, "Opened soft keyboard"))
+                .setOnEmojiPopupDismissListener(() -> emojiButton.setImageResource(R.drawable.emoji_ios_category_smileysandpeople))
+                .setOnSoftKeyboardCloseListener(() -> Log.d(TAG, "Closed soft keyboard"))
+                .setKeyboardAnimationStyle(R.style.emoji_fade_animation_style)
+                .setPageTransformer(new PageTransformer())
+                .build(editText);
     }
 }
