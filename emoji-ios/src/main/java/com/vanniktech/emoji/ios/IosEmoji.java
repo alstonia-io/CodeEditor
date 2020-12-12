@@ -33,9 +33,10 @@ import java.lang.ref.SoftReference;
 
 public class IosEmoji extends Emoji {
   private static final int CACHE_SIZE = 100;
-  private static final int SPRITE_SIZE = 64;
+  private static final int SPRITE_SIZE_WIDTH = 64;
+  private static final int SPRITE_SIZE_HEIGHT = 73;
   private static final int SPRITE_SIZE_INC_BORDER = 66;
-  private static final int NUM_STRIPS = 56;
+  private static final int NUM_STRIPS = 57;
 
   private static final Object LOCK = new Object();
 
@@ -90,7 +91,10 @@ public class IosEmoji extends Emoji {
       return new BitmapDrawable(context.getResources(), bitmap);
     }
     final Bitmap strip = loadStrip(context);
-    final Bitmap cut = Bitmap.createBitmap(strip, 1, y * SPRITE_SIZE_INC_BORDER + 1, SPRITE_SIZE, SPRITE_SIZE);
+//    System.out.println("Mera Image -----> ");
+//    System.out.println("Mera Image -----> height "+strip.getHeight());
+//    System.out.println("Mera Image -----> width "+strip.getWidth());
+    final Bitmap cut = Bitmap.createBitmap(strip, 1, y * SPRITE_SIZE_INC_BORDER + 1, SPRITE_SIZE_WIDTH, SPRITE_SIZE_HEIGHT);
     BITMAP_CACHE.put(key, cut);
     return new BitmapDrawable(context.getResources(), cut);
   }

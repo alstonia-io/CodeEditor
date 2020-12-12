@@ -145,11 +145,10 @@ final class Utils {
     if (emoji != null) {
       final int start = editText.getSelectionStart();
       final int end = editText.getSelectionEnd();
-
       if (start < 0) {
-        editText.append(emoji.getUnicode());
+        editText.append(emoji.getShortcodes().get(0));
       } else {
-        editText.getText().replace(Math.min(start, end), Math.max(start, end), emoji.getUnicode(), 0, emoji.getUnicode().length());
+        editText.getText().replace(Math.min(start, end), Math.max(start, end), emoji.getShortcodes().get(0), 0, emoji.getShortcodes().get(0).length());
       }
     }
   }
