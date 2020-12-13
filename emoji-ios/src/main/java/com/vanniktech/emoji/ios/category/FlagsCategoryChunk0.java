@@ -22,7 +22,8 @@ import com.vanniktech.emoji.ios.IosEmoji;
 final class FlagsCategoryChunk0 {
   @SuppressWarnings("PMD.ExcessiveMethodLength") static IosEmoji[] get() {
     return new IosEmoji[] {
-      new IosEmoji(0x1F3C1, new String[]{"যদি"}, 56, 0, false)
+      new IosEmoji(0x1F3C1, new String[]{"যদি"}, 56, 0, false),
+            new IosEmoji(0x1F6A9, new String[]{"ধোরি"}, 57, 0, false)
 //      new IosEmoji(0x1F6A9, new String[]{"triangular_flag_on_post"}, 35, 0, false),
 //      new IosEmoji(0x1F38C, new String[]{"crossed_flags"}, 7, 48, false),
 //      new IosEmoji(0x1F3F4, new String[]{"waving_black_flag"}, 11, 17, false)

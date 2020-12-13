@@ -34,9 +34,9 @@ import java.lang.ref.SoftReference;
 public class IosEmoji extends Emoji {
   private static final int CACHE_SIZE = 100;
   private static final int SPRITE_SIZE_WIDTH = 64;
-  private static final int SPRITE_SIZE_HEIGHT = 73;
+  private static final int SPRITE_SIZE_HEIGHT = 72;
   private static final int SPRITE_SIZE_INC_BORDER = 66;
-  private static final int NUM_STRIPS = 57;
+  private static final int NUM_STRIPS = 58;
 
   private static final Object LOCK = new Object();
 

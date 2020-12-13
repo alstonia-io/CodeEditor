@@ -116,11 +116,12 @@
         <EditText
             android:id="@+id/main_activity_chat_bottom_message_edittext"
             android:layout_width="0dp"
-            android:layout_height="36dp"
+            android:layout_height="42dp"
             android:layout_weight="1"
             android:imeOptions="actionSend"
             android:importantForAutofill="no"
             android:inputType="textCapSentences|textMultiLine"
+            android:textColor="#000"
             android:maxLines="3" />
 
         <ImageButton
